@@ -18,10 +18,31 @@ ICRL jointly trains a solver and a critic from a shared backbone:
 
 The method is evaluated on agentic and reasoning tasks, including text-world interaction, web navigation, multi-hop question answering, and mathematical reasoning.
 
-## Repository Status
+## Quick Starts
 
-The source code is currently being organized and will be added later.
+### Preparation
+
+
+### Running
+
+1. Start the target environment
+
+2. Start training with the following command:
+```
+cd ICRL
+python -m icrl.hydra_runner \
+    custom=icrl \
+    custom.env_name=alfworld \
+    custom.custom_config.env_nums=32 \
+    custom.custom_config.max_rounds=2 \
+    +rollout.cli.start_rollout_id=0 \
+    checkpoint=qwen3_8b \
+    model=qwen3_8b \
+    optimizer=adam_offload \
+    algo.cli.use_tis=true \
+    algo.cli.use_rollout_logprobs=false
+```
 
 ## Citation
 
-Citation information will be added after the paper metadata is finalized.
+TBD
