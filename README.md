@@ -21,7 +21,7 @@ The method is evaluated on agentic and reasoning tasks, including text-world int
 ## Quick Starts
 ### Preparation
 
-ICRL rely on [AgentGym](https://github.com/WooooDyy/AgentGym) for training environment. To set up the ALFWorld environment, run the following commands:
+ICRL relies on [AgentGym](https://github.com/WooooDyy/AgentGym) for training environments. To set up the ALFWorld environment, run the following commands:
 
 1. Clone the repository
 ```bash
@@ -30,21 +30,32 @@ cd AgentGym/agentenv-alfworld
 ```
 
 2. Create a conda environment for the target environment and install the dependencies.
-```
+```bash
 conda create --name agentenv-alfworld python=3.9
 conda activate agentenv-alfworld
 bash ./setup.sh
 ```
 
-3. Launch the environment server:
+3. Launch the environment server(s):
+To start a single environment server, run:
 ```bash
 alfworld --host 0.0.0.0 --port 36001
 ```
-Keep this process running while the training script connects to the environment.
+
+For parallel rollout, launch multiple environment servers on consecutive ports. The default ICRL configuration uses `custom.custom_config.env_port_base=36001` and `custom.custom_config.env_nums=32`, so it expects 32 environment servers on ports `36001` through `36032`. From the AgentGym root directory, run:
+
+```bash
+mkdir -p env_logs
+for port in $(seq 36001 36032); do
+    nohup alfworld --host 0.0.0.0 --port "${port}" > "env_logs/alfworld_${port}.log" 2>&1 &
+done
+```
+
+The number of launched environment servers should match `custom.custom_config.env_nums`. If you launch `N` servers, use ports from `env_port_base` to `env_port_base + N - 1`, and set `custom.custom_config.env_nums=N` in the training command.
 
 
 ### Training
-1. Start the target environment
+1. Start the target environment server(s) as described above.
 
 2. Start training with the following command:
 ```
