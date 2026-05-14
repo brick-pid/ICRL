@@ -19,12 +19,31 @@ ICRL jointly trains a solver and a critic from a shared backbone:
 The method is evaluated on agentic and reasoning tasks, including text-world interaction, web navigation, multi-hop question answering, and mathematical reasoning.
 
 ## Quick Starts
-
 ### Preparation
 
+ICRL rely on [AgentGym](https://github.com/WooooDyy/AgentGym) for training environment. To set up the ALFWorld environment, run the following commands:
 
-### Running
+1. Clone the repository
+```bash
+git clone https://github.com/WooooDyy/AgentGym.git
+cd AgentGym/agentenv-alfworld
+```
 
+2. Create a conda environment for the target environment and install the dependencies.
+```
+conda create --name agentenv-alfworld python=3.9
+conda activate agentenv-alfworld
+bash ./setup.sh
+```
+
+3. Launch the environment server:
+```bash
+alfworld --host 0.0.0.0 --port 36001
+```
+Keep this process running while the training script connects to the environment.
+
+
+### Training
 1. Start the target environment
 
 2. Start training with the following command:
