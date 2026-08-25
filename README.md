@@ -1,6 +1,6 @@
 # ICRL: Learning to Internalize Self-Critique with Reinforcement Learning
 
-This repository will host the official implementation of **ICRL**, a reinforcement learning framework for helping language agents internalize self-critique.
+This repository will host the official implementation of **ICRL**, a reinforcement learning framework for helping language agents internalize self-critique. 📄 [Paper](https://arxiv.org/pdf/2605.15224)
 
 ICRL targets a common limitation of critique-based agent improvement: a model may solve a task after receiving critique, but fail again when the critique is removed. The goal of ICRL is to transfer critique-guided improvements back into the critique-free solver, so the agent improves its underlying capability instead of becoming dependent on external feedback.
 
